@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Form</title>
+  <style>
+    body {
+      font-family:'Times New Roman', Times, serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      width: 50%;
+      margin: 20px auto;
+      background-color: #bce2d9;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 8px;
+    }
+
+    input,
+    textarea {
+      margin-bottom: 16px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body ng-app="myApp" ng-controller="formController">
+
+  <div class="container">
+    <h1>Google opens New York headquarters in repurposed 1930s railway terminal  </h1>
+   
+    <p>CNN
+       Google is set to open its New York headquarters in a repurposed 1930s railway terminus near Hudson Square on Monday — and the tech giant says the project was designed with nature in mind.
+       The 12-story St. John’s Terminal building, located at the nexus of Hudson River Park, the West Village, SoHo and Tribeca, is being billed as a “workplace designed for teams,” but it’s also providing a new home for local flora and fauna.
+       <br><br>With 1.5 acres of street-level vegetation, rail bed gardens and terraces that are 95% made up of plants native to New York State, the habitat created by the project has attracted more than 40 bird species, “including birds fueling up for a trans-Atlantic migratory flight,” wrote Google’s president for Americas and Global Business, Sean Downey, in an open letter on Wednesday.
+    </p>
+
+    <img src="C:/Users/Dell/Documents/AWTL/ass3/1.jpeg", max-height="150px" width="100%"></img>
+    <p>
+        “It’s actually re-knitting the ecosystem, from the insects to the birds,” said Rick Cook, a founding partner at CookFox Architects, one of the design firms behind the project, in an introductory video published by Google.
+        <br><br>Once at the end of the railway now forming New York’s High Line, St. John’s Terminal served as a freight facility and office space. The renovation retained the original rail beds, turning them into planters that hang above the building’s main entrance, and incorporated wood reclaimed from the Coney Island boardwalk after Hurricane Sandy. Google said that the decision to repurpose an old building, rather than constructing its new headquarters from scratch, saved 78,400 metric tons of carbon dioxide emissions (equivalent to taking around 17,000 cars off the road for a year). The tech giant also claimed it had prevented 77% of its construction waste from ending up in landfills.
+        <br><br>The complex is one of several Google offices built in renovated structures, including a converted flour mill in Dublin, a former aircraft hangar in LA’s Playa Vista neighborhood and Pier 57, once a New York City shipping terminal, that is now part of the broader 1.7-million-square foot Hudson Square Google complex. The tech firm also recently converted the nearby Chelsea Market, purchased for $2.4 billion in 2018, into a retail and office development.
+    </p>
+    <img src="C:/Users/Dell/Documents/AWTL/ass3/2.jpeg", max-height="150px" width="100%"></img>
+   
+    <h2>Subscribe to our newsletter !</h2>
+    
+    <form name="myForm" ng-submit="submitForm()" novalidate>
+
+      <label for="fullName">Full Name:</label>
+      <input type="text" id="fullName" name="fullName" ng-model="formData.fullName" required>
+      <span ng-show="myForm.fullName.$touched && myForm.fullName.$error.required" class="error">Full Name is required</span>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" ng-model="formData.email" required>
+      <span ng-show="myForm.email.$touched && myForm.email.$error.required" class="error">Email is required</span>
+      <span ng-show="myForm.email.$touched && myForm.email.$error.email" class="error">Invalid email format</span>
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" ng-model="formData.message" required></textarea>
+      <span ng-show="myForm.message.$touched && myForm.message.$error.required" class="error">Message is required</span>
+
+      <button type="submit" ng-disabled="myForm.$invalid">Submit</button>
+
+<!-- Display confirmation message if form is submitted -->
+<div ng-show="submitted" class="confirmation">
+  Form submitted successfully! Thank you for your application.
+</div>
+</form> 
+<p>Source: <u>https://edition.cnn.com/2024/02/23/style/google-new-york-headquarters-st-johns-terminal/index.html</u></p>
+
+  </div>
+
+  <script src="angular.min.js"></script>
+  <script>
+    var app = angular.module('myApp', []);
+
+    app.controller('formController', function($scope) {
+      $scope.formData = {};
+
+      $scope.submitted = false; // Add a variable to track submission status
+
+    $scope.submitForm = function() {
+      // Your form submission logic goes here
+      console.log('Form submitted:', $scope.formData);
+      // Add additional logic like sending data to a server
+
+      // Set the submitted variable to true to display the confirmation message
+      $scope.submitted = true;
+  };
+    });
+  </script>
+</body>
+</html>
